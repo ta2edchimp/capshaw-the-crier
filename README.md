@@ -4,11 +4,11 @@ A Discord Bot that keeps you updated with DDO news.
 
 # Setup
 
+**The easiest way** to get Capshaw up and running: [remix on Glitch](https://glitch.com/edit/#!/remix/ta2edchimp-capshaw-the-crier).  
+
 Capshaw requires [node js](https://nodejs.org/en/download/).
 
 Clone this repo (or download the zip), set up the required settings (see below), run `npm install` to install all the required dependencies and `npm start` to start up the bot.
-
-If you do not want to host the bot youself, you might also [remix on Glitch](https://glitch.com/help/remix/).
 
 You have two provide a Token and a channel name so that Capshaw knows where to post any news he finds, see [How to set up a Bot Account for Discord](https://anidiotsguide_old.gitbooks.io/discord-js-bot-guide/content/getting-started/the-long-version.html) on how to obtain the Token for your Discord server. The channel name is simply the name of the Discord server's channel.  
 These credentials have to be put into a file called `.env` in the bot's directory.
