@@ -1,0 +1,9 @@
+.data/
+.vscode/
+assets/
+node_modules/
+
+.env
+
+*.log
+npm-debug.log.*
