@@ -114,7 +114,9 @@ module.exports.run = function run(log, store, client) {
       const posts = $('.article-item');
 
       if (!posts.length) {
-        return log.info('Capshaw didn\'t find any news');
+        channel.stopTyping(true);
+        log.info('Capshaw didn\'t find any news');
+        return;
       }
 
       // Compile the necessary information
@@ -144,6 +146,7 @@ module.exports.run = function run(log, store, client) {
 
       // Exit if there's nothing to post
       if (lastNews.length === 0) {
+        channel.stopTyping(true);
         log.info('Capshaw did not find anything new');
         return;
       }
