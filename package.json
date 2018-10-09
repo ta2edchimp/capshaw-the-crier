@@ -1,7 +1,7 @@
 {
   "name": "capshaw-the-crier",
   "displayName": "Capshaw the Crier",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Capshaw the Crier - A DDO Discord Bot",
   "main": "app/index.js",
   "scripts": {
@@ -21,11 +21,11 @@
   "license": "ISC",
   "homepage": "https://github.com/ta2edchimp/capshaw-the-crier",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/ta2edchimp/capshaw-the-crier.git"
+    "type": "git",
+    "url": "https://github.com/ta2edchimp/capshaw-the-crier.git"
   },
   "bugs": {
-    "url" : "https://github.com/ta2edchimp/capshaw-the-crier/issues"
+    "url": "https://github.com/ta2edchimp/capshaw-the-crier/issues"
   },
   "devDependencies": {
     "dotenv": "6.0.0",
