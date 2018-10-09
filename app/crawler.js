@@ -66,12 +66,18 @@ function resolveNewsPost(post) {
 }
 
 module.exports.run = function run(log, store, client) {
-  const now = Date.now();
+  const channel = client.channels.find(
+    ch => ch.name === process.env.DISCORD_CHANNEL
+  );
+
+  if (!channel) {
+    log.error(`Capshaw cannot find Discord Channel "${process.env.DISCORD_CHANNEL}"`);
+    return;
+  }
 
   log.info('Capshaw starts looking for news ...');
 
-  client.user.setActivity('for news', { type: 'WATCHING' });
-
+  const now = Date.now();
   const crawler = new Crawler(newsHubUrl);
 
   crawler.interval = 30000;
@@ -81,7 +87,18 @@ module.exports.run = function run(log, store, client) {
 
   crawler.on(
     'crawlstart',
-    _ => log.info(`Capshaw started crawling ${newsHubUrl}`)
+    () => {
+      log.info(`Capshaw started crawling ${newsHubUrl}`);
+      channel.startTyping();
+    }
+  );
+
+  crawler.on(
+    'fetcherror',
+    () => {
+      log.error(`Capshaw could not crawl ${newsHubUrl}`);
+      channel.stopTyping();
+    }
   );
 
   crawler.on(
@@ -144,15 +161,6 @@ module.exports.run = function run(log, store, client) {
         })
       );
 
-      const channel = client.channels.find(
-        ch => ch.name === process.env.DISCORD_CHANNEL
-      );
-
-      if (!channel) {
-        log.error(`Capshaw cannot find Discord Channel "${process.env.DISCORD_CHANNEL}"`);
-        return;
-      }
-
       compiledNews
         .sort((a, b) => a.date > b.date ? a : b)
         .forEach((post, idx) => {
@@ -190,6 +198,8 @@ module.exports.run = function run(log, store, client) {
 
           channel.send(embed);
         });
+
+      channel.stopTyping(true);
 
       // Update the store ... also, to prevent double posting news
       store.update(compiledNews);

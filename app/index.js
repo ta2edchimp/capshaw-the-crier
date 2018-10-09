@@ -103,6 +103,8 @@ function scheduleRelog(timeout = 10) {
  * Handles the bot's successfull connection to Discord
  */
 function onReady() {
+  client.user.setActivity('for news', { type: 'WATCHING' });
+
   crawler.run(log, store, client);
 
   const msPerHour = 60 * 60 * 1000;
